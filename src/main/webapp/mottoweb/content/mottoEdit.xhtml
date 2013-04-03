@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsfcomp="http://java.sun.com/jsf/composite/jsf-components/">
+ 
+ 	<body>
+	   	<ui:composition template="/template/mottoone/layout.xhtml">
+	    		<ui:define name="main">
+
+					<p:panel header="#{msg['content.mottoEdit.title']}">
+						<!-- edit -->
+					    <h:panelGrid id="mygrid" columns="3" cellpadding="5">
+				            <h:outputLabel for="content" value="#{msg['content.mottoEdit.content']}:*"/>  
+				            <p:inputText id="content" value="#{mottoEditPage.content}" size="60" label="Content" required="true" binding="#{ContentToGetErrorHighlighting}"/>  
+							<h:message for="content" class="error_message" />
+	
+				            <h:outputLabel for="author" value="#{msg['content.mottoEdit.author']}:*"/>  
+				            <p:inputText id="author" value="#{mottoEditPage.author}" size="60" label="Author" required="true" binding="#{AuthorToGetErrorHighlighting}"/>  
+							<h:message for="author" class="error_message" />
+	
+				            <f:facet name="footer">  
+			            		<h:link value="#{msg['content.mottoEdit.cancel']}" outcome="/mottoweb/home?faces-redirect=true" />&nbsp;&nbsp;&nbsp;&nbsp;
+	 	       					<p:commandButton value="#{msg['content.mottoEdit.create']}" action="#{mottoEditPage.createNewMotto}" ajax="true" update="mygrid" />
+	 	       				</f:facet>
+	     				</h:panelGrid>  
+     				</p:panel>
+
+	    		</ui:define>
+	    </ui:composition>
+    </body>
+</html>

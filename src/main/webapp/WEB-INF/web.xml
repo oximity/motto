@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <web-app xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0"
+    id="WebApp_ID">
+ 
+  <display-name>JavaServerFaces</display-name>
+
+  <!-- Make sure that your web.xml is pointing the version="3.0" as above -->
+  <session-config>
+    <!-- session timeout in minutes -->
+    <session-timeout>30</session-timeout>
+    <!-- other security related configuration -->
+    <cookie-config>
+       <http-only>true</http-only>
+       <!-- TODO: set this only to "true" if https is really used, otherwise we loose sessions
+                 (see also http://stackoverflow.com/questions/12879779/httponly-cookie-web-3-0-causing-unexpected-timeout):
+         <secure>true</secure>
+       -->
+    </cookie-config>
+    <tracking-mode>COOKIE</tracking-mode>
+  </session-config>
+    
+  <!--
+   Enable the Development Project Stage. Doing this enables better error messages,
+   including in the client side JavaScript, at the cost of some performance.
+   Change from "Development" to "Production" when you are ready to deploy
+    -->
+  <context-param>
+    <param-name>javax.faces.PROJECT_STAGE</param-name>
+    <param-value>Development</param-value>
+  </context-param>
+  <context-param>  
+    <param-name>primefaces.THEME</param-name>  
+    <param-value>bluesky</param-value>  
+  </context-param> 
+  <!-- SKIP_COMMENTS - see also: http://www.mkyong.com/jsf2/how-to-use-comments-in-jsf-2-0/ -->
+  <context-param>
+    <param-name>facelets.FACELETS_SKIP_COMMENTS</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+   <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
+   <param-value>demo.motto</param-value>
+  </context-param>
+ 
+  <!-- Welcome page 
+  <welcome-file-list>
+    <welcome-file>mottoweb/home.xhtml</welcome-file>
+  </welcome-file-list>-->
+ 
+  <!-- JSF mapping -->
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- Map these files with JSF -->
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.jsf</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.faces</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+ 
+  <!--
+       WEB FILTER,
+       the order matters,
+       details in "4 Understanding and Using Servlet Filters" http://docs.oracle.com/cd/B32110_01/web.1013/b28959/filters.htm
+    -->  
+  <filter>
+    <!-- Must be the first filter! -->
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<filter-class>demo.motto.util.webserver.CharacterEncodingFilter</filter-class>
+  </filter>
+  <filter>
+	<filter-name>RequestLoggingFilter</filter-name>
+	<filter-class>demo.motto.util.webserver.RequestLoggingFilter</filter-class>
+  </filter>
+  <filter>
+	<filter-name>Pretty Filter</filter-name>
+	<filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+	<filter-name>RequestLoggingFilter</filter-name>
+	<url-pattern>/article/*</url-pattern>
+	<url-pattern>/newsweb/*</url-pattern>
+	<url-pattern>/user/*</url-pattern>
+	<url-pattern>/org/*</url-pattern>
+	<url-pattern>/tag/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+	<filter-name>Pretty Filter</filter-name>
+	<url-pattern>/*</url-pattern>
+	<dispatcher>REQUEST</dispatcher>
+	<dispatcher>FORWARD</dispatcher>
+	<dispatcher>ERROR</dispatcher>
+  </filter-mapping>
+</web-app>

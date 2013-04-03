@@ -1,0 +1,50 @@
+/*
+ * Motto Web App Demo Application - oximity.com
+ * Copyright (c) 2013 Oximity Limited
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, see <http://www.gnu.org/licenses/>.
+ */
+
+apply plugin: 'scala'
+apply plugin: 'war'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+defaultTasks = ['clean', 'war']
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.10.1'
+
+    // Local files
+    compile fileTree(dir: 'lib/main', include: '*.jar')
+    providedCompile fileTree(dir: 'lib/main/to_compile_only', include: '*.jar')
+
+    testCompile 'org.scala-lang:scala-library:2.10.1'
+    testCompile 'junit:junit:4.5'
+    testCompile 'jdepend:jdepend:2.9.1'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+}
+
+task deployWar(type: Copy) {
+    dependsOn 'war'
+    description 'deploy war locally'
+    from war.archivePath
+    into deployWarDir // defined in gradle.properties
+}
+

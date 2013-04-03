@@ -1,0 +1,7 @@
+bin
+build
+jboss_deployments
+.settings
+.cache
+.gradle
+*~

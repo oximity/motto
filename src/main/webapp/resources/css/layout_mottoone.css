@@ -1,0 +1,19 @@
+ /*
+ * OVERALL DESIGN
+ */
+ 
+ 
+body {
+}
+
+.ui-panel-content {
+}
+
+.one-motto {
+	background-color:#EDF5FC;
+	text-align: center;
+}
+.one-motto div {
+    font-size: 1.5em;
+    line-height: 1.2em;
+}

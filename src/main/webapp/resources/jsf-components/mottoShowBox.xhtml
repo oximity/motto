@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:composite="http://java.sun.com/jsf/composite"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:c="http://java.sun.com/jsp/jstl/core"
+  xmlns:jsfcomp="http://java.sun.com/jsf/composite/jsf-components/"
+  >
+    <h:head>
+        <title>(This will not be displayed) - render a motto</title>
+    </h:head>
+    <h:body>
+        <composite:interface>
+            <composite:attribute name="motto" type="demo.motto.model.content.Motto" required="true"/>
+            <composite:attribute name="title" type="String" required="true"/>
+        </composite:interface>
+
+        <composite:implementation>
+
+			<p:panel header="#{cc.attrs.title}" styleClass="one-motto">
+				<div>
+	    		<b><a href="/motto/#{cc.attrs.motto.mottoId}"
+	    		   ><jsfcomp:outputFormatMultiline id="content" value="#{cc.attrs.motto.content}"/></a></b>
+	    		-&nbsp;<h:outputFormat id="author" value="#{cc.attrs.motto.author}"/>
+	    		</div>
+			</p:panel>
+
+        </composite:implementation>
+    </h:body>
+</html>

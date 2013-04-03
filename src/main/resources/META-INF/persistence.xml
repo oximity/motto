@@ -1,0 +1,16 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+   version="1.0">
+    <persistence-unit name="dbMotto" transaction-type="JTA">
+	    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+ 	    <jta-data-source>java:jboss/datasources/mottoDS</jta-data-source>
+        <properties>
+	        <property name="eclipselink.logging.level" value="FINE" />
+			<property name="hibernate.connection.characterEncoding" value="utf8mb4"/>
+	        <property name="hibernate.show_sql" value="false" />
+	        <property name="hibernate.format_sql" value="true" />
+            <!--<property name="hibernate.hbm2ddl.auto" value="validate" /> &lt;!&ndash; Tests the mappings against schema &ndash;&gt;-->
+        </properties>
+    </persistence-unit>
+</persistence>
