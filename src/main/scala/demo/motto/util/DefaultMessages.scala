@@ -28,6 +28,6 @@ class DefaultMessages extends Serializable {
   @PostConstruct
   def init() = {
     /* path: src/main/resources/messages */
-    messagesResourceBundle = ResourceBundle.getBundle("messages", Locale.US)
+    messagesResourceBundle = new MessagesResourceBundle(Locale.US)
   }
 }
